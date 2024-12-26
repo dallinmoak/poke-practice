@@ -9,7 +9,7 @@ export default function PokemonList() {
   const [showAddForm, setShowAddForm] = useState(false);
 
   const getPokemon = async () => {
-    const response = await fetch('http://localhost:3000/api/pokemon', {
+    const response = await fetch('/api/pokemon', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export default function PokemonList() {
     e.preventDefault();
     const name = e.target[0].value;
     console.log("submitting", name);
-    const response = await fetch('http://localhost:3000/api/pokemon', {
+    const response = await fetch('/api/pokemon', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
