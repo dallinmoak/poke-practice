@@ -1,4 +1,4 @@
-import client from "@/app/lib/db";
+import client from "@/lib/db";
 
 const collection = client.db("poke-practice").collection("pokemon");
 
