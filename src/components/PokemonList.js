@@ -1,5 +1,6 @@
 'use client';
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function PokemonList() {
@@ -50,7 +51,9 @@ export default function PokemonList() {
         {pokemon.map((pokemon, index) => {
           return (
             <li key={index}>
-              <p>{pokemon.name}</p>
+              <Link href={`/pokemon/${pokemon._id}`}>
+                <p>{pokemon.name}</p>
+              </Link>
             </li>
           );
         })}
