@@ -9,7 +9,7 @@ export default function PokemonPage({ id }) {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
 
   const getData = async () => {
-    const response = await fetch(`http://localhost:3000/api/pokemon/${id}`, {
+    const response = await fetch(`/api/pokemon/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export default function PokemonPage({ id }) {
     e.preventDefault();
     const name = e.target[0].value;
     console.log("submitting", name);
-    const response = await fetch(`http://localhost:3000/api/pokemon/${id}`, {
+    const response = await fetch(`/api/pokemon/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ export default function PokemonPage({ id }) {
   };
 
   const handleDelete = async () => {
-    const response = await fetch(`http://localhost:3000/api/pokemon/${id}`, {
+    const response = await fetch(`/api/pokemon/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
