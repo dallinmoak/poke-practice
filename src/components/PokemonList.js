@@ -16,7 +16,6 @@ export default function PokemonList() {
       },
     });
     const data = await response.json();
-    console.log(data);
     setPokemon(data);
   }
 
@@ -27,7 +26,6 @@ export default function PokemonList() {
   const handleAddPokemon = async (e) => {
     e.preventDefault();
     const name = e.target[0].value;
-    console.log("submitting", name);
     const response = await fetch('/api/pokemon', {
       method: 'POST',
       headers: {

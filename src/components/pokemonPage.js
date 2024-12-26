@@ -19,7 +19,6 @@ export default function PokemonPage({ id }) {
       },
     });
     const data = await response.json();
-    console.log(data);
     if (data && data.name) {
       document.title = data.name;
       setPokemon(data);
@@ -33,7 +32,6 @@ export default function PokemonPage({ id }) {
   const handleEditPokemon = async (e) => {
     e.preventDefault();
     const name = e.target[0].value;
-    console.log("submitting", name);
     const response = await fetch(`/api/pokemon/${id}`, {
       method: 'PUT',
       headers: {
