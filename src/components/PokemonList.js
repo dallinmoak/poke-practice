@@ -1,7 +1,8 @@
 'use client';
 
+import { currentUser } from "@/lib/providers/currentUser";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export default function PokemonList() {
 
@@ -42,8 +43,12 @@ export default function PokemonList() {
     }
   }
 
+  const { user: thisCurrentUser, setUser: setThisCurrentUser } = useContext(currentUser);
+
   return (
     <>
+      current user: {thisCurrentUser}
+      <button onClick={() => setThisCurrentUser('new user')}>change user</button>
       <h1>Pokemon List</h1>
       <ul>
         {pokemon.map((pokemon, index) => {
