@@ -30,8 +30,11 @@ const fetchUser = async (token) => {
     return;
   } else {
     const user = await userRes.json();
-    return user;
+    return { ...user, token };
   }
 }
 
-export { fetchToken, fetchUser };
+export {
+  fetchToken,
+  fetchUser
+};

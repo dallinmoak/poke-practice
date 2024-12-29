@@ -49,7 +49,10 @@ export default function PokemonList() {
     <>
       <h1>Hello, {user.username}</h1>
       <p>current user: {user.username}</p>
-      <button onClick={() => setUser(null)}>logout</button>
+      <button onClick={() => {
+        setUser(null);
+        localStorage.removeItem('user');
+      }}>logout</button>
       <ul>
         {pokemon.map((pokemon, index) => {
           return (
