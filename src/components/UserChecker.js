@@ -26,16 +26,18 @@ export default function UserChecker({ children }) {
           },
           body: JSON.stringify({ username })
         });
-        const user = await res.json();
         if (!res.ok) {
-          console.error("Error in login", user);
+          const text = await res.text();
+          console.error("Error in login", text);
           return;
-        }
-        console.log("user", user);
-        if (setUser) {
-          setUser(user);
         } else {
-          console.error("setUser is not defined");
+          // TODO: store token in local storage instead of user object
+          const user = await res.json();
+          if (setUser) {
+            setUser(user);
+          } else {
+            console.error("setUser is not defined");
+          }
         }
       } catch (error) {
         console.error("Error in login", error);

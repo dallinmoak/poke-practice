@@ -6,10 +6,9 @@ export async function POST(request) {
     request.body
   );
   const creds = await request.json();
-  console.log("creds", creds);
   const user = await getByUsername(creds.username);
   if (!user) {
-    return new Response("User not found", { status: 404 });
+    return new Response(`User ${creds.username} not found`, { status: 404 });
   } else {
     return new Response(JSON.stringify(user), { status: 200 });
   }
