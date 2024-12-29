@@ -43,13 +43,12 @@ export default function PokemonList() {
     }
   }
 
-  const { user: thisCurrentUser, setUser: setThisCurrentUser } = useContext(currentUser);
+  const { user, setUser } = useContext(currentUser);
 
   return (
     <>
-      current user: {thisCurrentUser}
-      <button onClick={() => setThisCurrentUser('new user')}>change user</button>
-      <h1>Pokemon List</h1>
+      current user: {user}
+      <button onClick={() => setUser(null)}>logout</button>
       <ul>
         {pokemon.map((pokemon, index) => {
           return (
