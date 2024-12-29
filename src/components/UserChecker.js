@@ -12,7 +12,7 @@ export default function UserChecker({ children }) {
       e.preventDefault();
       const formData = new FormData(e.target);
       const username = formData.get('username');
-      setUser(username);
+      setUser({ username });
     }}>
       <input type="text" placeholder="username" name='username' />
       {/* <input type="password" placeholder="password" name='password' /> */}

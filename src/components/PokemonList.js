@@ -47,8 +47,8 @@ export default function PokemonList() {
 
   return (
     <>
-      <h1>Hello, {user}</h1>
-      <p>current user: {user}</p>
+      <h1>Hello, {user.username}</h1>
+      <p>current user: {user.username}</p>
       <button onClick={() => setUser(null)}>logout</button>
       <ul>
         {pokemon.map((pokemon, index) => {
