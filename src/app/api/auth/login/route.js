@@ -1,4 +1,4 @@
-import { generateToken } from "@/lib/auth";
+import { generateToken } from "@/lib/server/auth";
 import { getByUsername } from "@/models/user";
 
 export async function POST(request) {

@@ -1,4 +1,4 @@
-import { getUser } from "@/lib/auth";
+import { getUser } from "@/lib/server/auth";
 
 export async function GET(request) {
   const authHeader = request.headers.get('Authorization');

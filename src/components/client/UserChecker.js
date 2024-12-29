@@ -1,7 +1,7 @@
 'use client';
 
 import { useContext } from "react";
-import { currentUser } from "@/lib/providers/currentUser";
+import { currentUser } from "@/lib/client/providers/currentUser";
 
 export default function UserChecker({ children }) {
   const context = useContext(currentUser);

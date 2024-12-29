@@ -1,6 +1,6 @@
-import CurrentUserProviderWrapper from "@/lib/providers/currentUserWrapper";
+import CurrentUserProviderWrapper from "@/lib/client/providers/currentUserWrapper";
 import "./globals.css";
-import UserChecker from "@/components/UserChecker";
+import UserChecker from "@/components/client/UserChecker";
 
 export default function RootLayout({ children }) {
   return (

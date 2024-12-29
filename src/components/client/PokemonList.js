@@ -1,6 +1,6 @@
 'use client';
 
-import { currentUser } from "@/lib/providers/currentUser";
+import { currentUser } from "@/lib/client/providers/currentUser";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 

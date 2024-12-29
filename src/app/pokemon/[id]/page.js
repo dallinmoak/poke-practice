@@ -1,4 +1,4 @@
-import PokemonPage from "@/components/pokemonPage";
+import PokemonPage from "@/components/client/pokemonPage";
 
 export default async function Page({ params }) {
   const { id } = await params;

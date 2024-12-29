@@ -1,4 +1,4 @@
-import client from "@/lib/db";
+import client from "@/lib/server/db";
 import { ObjectId } from "mongodb";
 
 const collection = client.db("poke-practice").collection("users");
