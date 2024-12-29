@@ -1,5 +1,5 @@
 import client from "@/lib/db";
-// import { ObjectId } from "mongodb";
+import { ObjectId } from "mongodb";
 
 const collection = client.db("poke-practice").collection("users");
 
@@ -13,7 +13,19 @@ const getByUsername = async (username) => {
   }
 };
 
+const getbyId = async (id) => {
+  try {
+    const user = await collection.findOne({ _id: new ObjectId(id) });
+    return user;
+  }
+  catch (error) {
+    console.error("Error in getById", error);
+    return null;
+  }
+}
+
 
 export {
   getByUsername,
+  getbyId,
 }

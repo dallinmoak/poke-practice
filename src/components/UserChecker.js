@@ -31,12 +31,23 @@ export default function UserChecker({ children }) {
           console.error("Error in login", text);
           return;
         } else {
-          // TODO: store token in local storage instead of user object
-          const user = await res.json();
-          if (setUser) {
-            setUser(user);
+          const token = (await res.json()).token;
+          const userRes = await fetch(`/api/auth`, {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          })
+          if (!userRes.ok) {
+            console.error("bad user res", userRes);
+            return;
           } else {
-            console.error("setUser is not defined");
+            const user = await userRes.json();
+            if (setUser) {
+              setUser(user);
+            } else {
+              console.error("setUser is not defined");
+            }
           }
         }
       } catch (error) {
