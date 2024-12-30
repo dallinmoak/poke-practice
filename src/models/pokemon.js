@@ -65,6 +65,17 @@ const deleteOne = async (id) => {
   }
 };
 
+const isOwner = async (pokemonId, ownerId) => {
+  try {
+    const pokemon = await getOne(pokemonId);
+    const foundOwnerId = pokemon.owner._id.toString();
+    return foundOwnerId === ownerId;
+  } catch (error) {
+    console.error("Error in pokemon model: ", error);
+    throw new Error(error);
+  }
+}
+
 export {
   getAll,
   getOne,
@@ -72,4 +83,5 @@ export {
   add,
   updateOne,
   deleteOne,
+  isOwner,
 }
