@@ -17,7 +17,6 @@ const getAll = async () => {
 const getByOnwer = async (ownerId) => {
   try {
     const result = await collection.find({ ownerId: new ObjectId(ownerId) }).toArray();
-    console.log("result: ", result);
     return result;
   } catch (error) {
     console.error("Error in pokemon model: ", error);

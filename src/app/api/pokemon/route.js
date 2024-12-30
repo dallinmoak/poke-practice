@@ -6,7 +6,6 @@ export async function GET(request) {
   const ownerId = url.searchParams.get('owner-id');
   if (ownerId) {
     const response = await getByOnwer(ownerId);
-    console.log('response: ', response);
     return new Response(JSON.stringify(response));
   } else {
     const response = await getAll();
