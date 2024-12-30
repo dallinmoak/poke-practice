@@ -1,5 +1,6 @@
 import client from "@/lib/server/db";
 import { ObjectId } from "mongodb";
+import { getbyId } from "@/models/user";
 
 const collection = client.db("poke-practice").collection("pokemon");
 
@@ -13,10 +14,22 @@ const getAll = async () => {
   }
 };
 
+const getByOnwer = async (ownerId) => {
+  try {
+    const result = await collection.find({ ownerId: new ObjectId(ownerId) }).toArray();
+    console.log("result: ", result);
+    return result;
+  } catch (error) {
+    console.error("Error in pokemon model: ", error);
+    throw new Error(error);
+  }
+};
+
 const getOne = async (id) => {
   try {
-    const result = await collection.findOne({ _id: new ObjectId(id) });
-    return result;
+    const pokemon = await collection.findOne({ _id: new ObjectId(id) });
+    const owner = await getbyId(pokemon.ownerId);
+    return { ...pokemon, owner };
   } catch (error) {
     console.error("Error in pokemon model: ", error);
     throw new Error(error);
@@ -25,7 +38,7 @@ const getOne = async (id) => {
 
 const add = async (pokemon) => {
   try {
-    const result = await collection.insertOne(pokemon);
+    const result = await collection.insertOne({ ...pokemon, ownerId: new ObjectId(pokemon.ownerId) });
     return result;
   } catch (error) {
     console.error("Error in pokemon model: ", error);
@@ -56,6 +69,7 @@ const deleteOne = async (id) => {
 export {
   getAll,
   getOne,
+  getByOnwer,
   add,
   updateOne,
   deleteOne,

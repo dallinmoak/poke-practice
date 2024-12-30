@@ -6,11 +6,12 @@ import { useContext, useEffect, useState } from "react";
 
 export default function PokemonList() {
 
+  const { user, setUser } = useContext(currentUser);
   const [pokemon, setPokemon] = useState([]);
   const [showAddForm, setShowAddForm] = useState(false);
 
-  const getPokemon = async () => {
-    const response = await fetch('/api/pokemon', {
+  const getMyPokemon = async () => {
+    const response = await fetch(`/api/pokemon?owner-id=${user._id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ export default function PokemonList() {
   }
 
   useEffect(() => {
-    getPokemon();
+    getMyPokemon();
   }, []);
 
   const handleAddPokemon = async (e) => {
@@ -32,22 +33,21 @@ export default function PokemonList() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ name, ownerId: user._id }),
     });
     const data = await response.json();
     if (!data.error) {
-      getPokemon();
+      getMyPokemon();
       setShowAddForm(false);
     } else {
       console.log(data.error);
     }
   }
 
-  const { user, setUser } = useContext(currentUser);
 
   return (
     <>
-      <h1>Hello, {user.username}</h1>
+      <h1>Hello, {user.name}</h1>
       <p>current user: {user.username}</p>
       <button onClick={() => {
         setUser(null);
@@ -64,7 +64,7 @@ export default function PokemonList() {
           );
         })}
       </ul>
-      <button onClick={getPokemon}>Refresh</button>
+      <button onClick={getMyPokemon}>Refresh</button>
       <button onClick={() => setShowAddForm(true)}>Add pokemon</button>
       {showAddForm && (
         <form onSubmit={handleAddPokemon}>

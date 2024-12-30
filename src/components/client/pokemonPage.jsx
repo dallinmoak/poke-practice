@@ -64,12 +64,15 @@ export default function PokemonPage({ id }) {
   return (
     <>
       <h1>{pokemon.name}</h1>
-      <p>{pokemon._id}</p>
+      <p>Owner username: {pokemon.owner?.username}</p>
+      <p>owner name: {pokemon.owner?.name}</p>
+      <p>pokemon record id: {pokemon._id}</p>
       {!showEditForm && <button onClick={() => setShowEditForm(true)}>edit</button>}
       {showEditForm && (
         <form onSubmit={handleEditPokemon}>
           <input type="text" defaultValue={pokemon.name} />
           <button type='submit'>save</button>
+          <button onClick={() => setShowEditForm(false)}>cancel</button>
         </form>
       )}
       {!showDeleteForm && <button onClick={() => setShowDeleteForm(true)}>delete</button>}
