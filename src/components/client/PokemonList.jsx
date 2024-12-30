@@ -47,12 +47,8 @@ export default function PokemonList() {
 
   return (
     <>
-      <h1>Hello, {user.name}</h1>
-      <p>current user: {user.username}</p>
-      <button onClick={() => {
-        setUser(null);
-        localStorage.removeItem('user');
-      }}>logout</button>
+      <h2>My Pokemon</h2>
+      {pokemon.length === 0 && <p>No pokemon found</p>}
       <ul>
         {pokemon.map((pokemon, index) => {
           return (

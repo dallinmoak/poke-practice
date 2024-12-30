@@ -1,6 +1,7 @@
 import CurrentUserProviderWrapper from "@/lib/client/providers/currentUserWrapper";
 import "./globals.css";
 import UserChecker from "@/components/client/UserChecker";
+import Header from "@/components/client/Header";
 
 export default function RootLayout({ children }) {
   return (
@@ -8,6 +9,8 @@ export default function RootLayout({ children }) {
       <body className=''>
         <CurrentUserProviderWrapper>
           <UserChecker>
+            <Header />
+            <hr />
             {children}
           </UserChecker>
         </CurrentUserProviderWrapper>
