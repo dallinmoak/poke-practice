@@ -6,6 +6,7 @@ export async function POST(request) {
   if (!body || !body.username || !body.name) {
     return new Response('Bad request', { status: 400 });
   } else {
+    // TODO: check if user.username is already taken
     const newUser = await createUser(user);
     return new Response(JSON.stringify(newUser), { status: 201 });
   }

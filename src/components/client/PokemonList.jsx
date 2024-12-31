@@ -1,5 +1,6 @@
 'use client';
 
+import { authHeader } from "@/lib/client/authHelpers";
 import { currentUser } from "@/lib/client/providers/currentUser";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
@@ -15,8 +16,14 @@ export default function PokemonList() {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
+        ...authHeader(),
       },
     });
+    if (!response.ok) {
+      const error = await response.text();
+      console.log(error);
+      return;
+    }
     const data = await response.json();
     setPokemon(data);
   }
@@ -32,6 +39,7 @@ export default function PokemonList() {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        ...authHeader(),
       },
       body: JSON.stringify({ name, ownerId: user._id }),
     });

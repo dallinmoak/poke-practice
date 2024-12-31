@@ -1,14 +1,10 @@
-import { getUser } from "@/lib/server/auth";
+import { getAuthToken, getUser, unauthed } from "@/lib/server/auth";
 
 export async function GET(request) {
-  const authHeader = request.headers.get('Authorization');
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return new Response('Unauthorized', { status: 401 });
-  }
-  const token = authHeader.split(' ')[1];
+  const token = getAuthToken(request);
   const user = await getUser(token);
   if (!user) {
-    return new Response('Unauthorized', { status: 401 });
+    return unauthed;
   } else {
     return new Response(JSON.stringify(user), { status: 200 });
   }

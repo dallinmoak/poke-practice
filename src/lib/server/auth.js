@@ -40,6 +40,17 @@ const isOwnerByToken = async (token, pokemonId) => {
   }
 }
 
+const isUserByToken = async (token, userId) => {
+  try {
+    const decoded = verify(token);
+    if (!decoded) return false;
+    return decoded.userId === userId;
+  } catch (err) {
+    console.error('error in isUserByToken', err);
+    return false;
+  }
+}
+
 const unauthed = new Response('Unauthorized', { status: 401 });
 
 const getAuthToken = (request) => {
@@ -53,6 +64,7 @@ const getAuthToken = (request) => {
 export {
   generateToken,
   getUser,
+  isUserByToken,
   isOwnerByToken,
   unauthed,
   getAuthToken

@@ -1,5 +1,6 @@
 'use client';
 
+import { authHeader } from "@/lib/client/authHelpers";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -17,7 +18,7 @@ export default function PokemonPage({ id }) {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user'))}`
+        ...authHeader(),
       },
     });
     if (!response.ok) {
@@ -51,7 +52,7 @@ export default function PokemonPage({ id }) {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user'))}`
+        ...authHeader(),
       },
       body: JSON.stringify({ name }),
     });
@@ -72,7 +73,7 @@ export default function PokemonPage({ id }) {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user'))}`
+        ...authHeader(),
       },
     });
     if (!response.ok) {
