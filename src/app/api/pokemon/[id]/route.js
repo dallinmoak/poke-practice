@@ -17,16 +17,32 @@ export async function GET(request, { params }) {
 }
 
 export async function PUT(request, { params }) {
-  // TODO: secure this endpoint
+  const token = getAuthToken(request);
+  if (!token) return unauthed;
   const id = (await params).id;
-  const pokemon = await request.json();
-  const response = await updateOne(id, pokemon);
-  return new Response(JSON.stringify(response));
+  try {
+    const isOwner = await isOwnerByToken(token, id);
+    if (!isOwner) return unauthed;
+    const pokemon = await request.json();
+    const response = await updateOne(id, pokemon);
+    return new Response(JSON.stringify(response));
+  } catch (e) {
+    console.error('Error in PUT', e);
+    return unauthed;
+  }
 }
 
 export async function DELETE(request, { params }) {
-  // TODO: secure this endpoint
+  const token = getAuthToken(request);
+  if (!token) return unauthed;
   const id = (await params).id;
-  const response = await deleteOne(id);
-  return new Response(JSON.stringify(response));
+  try {
+    const isOwner = await isOwnerByToken(token, id);
+    if (!isOwner) return unauthed;
+    const response = await deleteOne(id);
+    return new Response(JSON.stringify(response));
+  } catch (e) {
+    console.error('Error in DELETE', e);
+    return unauthed;
+  }
 }

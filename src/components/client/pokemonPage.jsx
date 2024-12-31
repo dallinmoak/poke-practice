@@ -51,15 +51,19 @@ export default function PokemonPage({ id }) {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user'))}`
       },
       body: JSON.stringify({ name }),
     });
-    const data = await response.json();
-    if (!data.error) {
-      getData();
-      setShowEditForm(false);
+    if (!response.ok) {
+      const error = await response.text();
+      console.log('error in edit', error);
     } else {
-      console.log(data.error);
+      const data = await response.json();
+      if (data) {
+        getData();
+        setShowEditForm(false);
+      }
     }
   };
 
@@ -68,13 +72,15 @@ export default function PokemonPage({ id }) {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('user'))}`
       },
     });
-    const data = await response.json();
-    if (!data.error) {
-      Router.push('/');
+    if (!response.ok) {
+      const error = await response.text();
+      console.log('error in delete', error);
     } else {
-      console.log(data.error);
+      const data = await response.json();
+      if (data) Router.push('/');
     }
   };
 
