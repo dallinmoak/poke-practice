@@ -42,6 +42,7 @@ export default function UserChecker({ children }) {
         <h1>Please log in</h1>
         <Login setUser={context.setUser} />
         <p>Don't have an account?&nbsp;<button onClick={() => setShowRegistration(true)}>sign up</button></p>
+        <p>Source code: <a href="https://github.com/dallinmoak/poke-practice">github.com/dallinmoak/poke-practice</a></p>
         <p>here's a list of existing usernames (this is temporary ofc)</p>
         <ul>
           {allUsers.map((u, i) => <li key={i}>{u}</li>)}
